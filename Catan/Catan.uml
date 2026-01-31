@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Codegen="http://www.eclipse.org/papyrus/Codegen/1" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML">
+  <uml:Model xmi:id="_VNu0YPyFEfCIJLiNA2SDug" name="Catan">
+    <packageImport xmi:type="uml:PackageImport" xmi:id="_VkNasPyFEfCIJLiNA2SDug">
+      <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+    </packageImport>
+    <packagedElement xmi:type="uml:Class" xmi:id="_jQu1EPyFEfCIJLiNA2SDug" name="Player">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_H74HUPyGEfCIJLiNA2SDug" name="victoryPoint" visibility="private">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_mau2cPyGEfCIJLiNA2SDug" name="pieces" visibility="private"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_2zPV8PyGEfCIJLiNA2SDug" name="hand" visibility="private"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_5eWRUPyGEfCIJLiNA2SDug" name="Player"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_9EUScPyGEfCIJLiNA2SDug" name="getCurrentHand"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_6oFEEPyHEfCARpjs8dmmgQ" name="buildRoad">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_CIGOAPyKEfCARpjs8dmmgQ" name="Parameter1" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_4ap4UPyJEfCARpjs8dmmgQ" name="buildSettlement">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_81UFwPyJEfCARpjs8dmmgQ" name="" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_FTfL8PyKEfCARpjs8dmmgQ" name="buildCity">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_Jb5LwPyKEfCARpjs8dmmgQ" name="Parameter1" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_OP0NwPyKEfCARpjs8dmmgQ" name="getVictoryPoints">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_Qj1e0PyKEfCARpjs8dmmgQ" name="" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Enumeration" xmi:id="_CvrSwPyHEfCIJLiNA2SDug" name="PieceType">
+      <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_cd2EoPyIEfCARpjs8dmmgQ" name="ROAD"/>
+      <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_em-7YPyIEfCARpjs8dmmgQ" name="SETTLEMENT"/>
+      <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_f8umUPyIEfCARpjs8dmmgQ" name="CITY"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_tIL7APyIEfCARpjs8dmmgQ" client="_jQu1EPyFEfCIJLiNA2SDug" supplier="_CvrSwPyHEfCIJLiNA2SDug">
+      <name xsi:nil="true"/>
+    </packagedElement>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_EmAQUPyJEfCARpjs8dmmgQ">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_EmFI0PyJEfCARpjs8dmmgQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/Codegen/1#/"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://Codegen_PROFILES/Codegen.profile.uml#_fPDsIBa-EearhdjjJ6cVzQ"/>
+    </profileApplication>
+  </uml:Model>
+  <Codegen:GeneratorHint xmi:id="_EmjC4PyJEfCARpjs8dmmgQ" base_Element="_VNu0YPyFEfCIJLiNA2SDug" generatorID="Standard Java">
+    <language xmi:type="Codegen:Language" href="pathmap://Codegen_PROFILES/languages.uml#_2Zt6YCjREeayco6FJ_OtTQ"/>
+  </Codegen:GeneratorHint>
+</xmi:XMI>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:Codegen="http://www.eclipse.org/papyrus/Codegen/1" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML">
+  <uml:Model xmi:id="_9w1R8PYqEfCRM-_Cjx4kQw" name="Catan">
+    <ownedComment xmi:type="uml:Comment" xmi:id="_P7DNYPYwEfCRM-_Cjx4kQw" annotatedElement="_9w1R8PYqEfCRM-_Cjx4kQw">
+      <body>This is my completed abstract class</body>
+    </ownedComment>
+    <packageImport xmi:type="uml:PackageImport" xmi:id="_91a3APYqEfCRM-_Cjx4kQw">
+      <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+    </packageImport>
+    <packagedElement xmi:type="uml:Class" xmi:id="_SrWSIPYtEfCRM-_Cjx4kQw" name="Bank">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_a3PVgPYtEfCRM-_Cjx4kQw" name="resourceList">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EMap"/>
+      </ownedAttribute>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="__xCHwPYtEfCRM-_Cjx4kQw" name="Bank "/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_DCOywPYuEfCRM-_Cjx4kQw" name="hasResource" concurrency="concurrent">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_U8HDcPyGEfCCsY5rHNVbNw" name="Parameter1" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_ZSpT8PyIEfCCsY5rHNVbNw" name="type" type="_86Y6YPyGEfCCsY5rHNVbNw"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_cSqIUPyIEfCCsY5rHNVbNw" name="amount">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_kfqmAPyIEfCCsY5rHNVbNw" name="giveResource" concurrency="concurrent">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_kfqmAfyIEfCCsY5rHNVbNw" name="Parameter1" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_kfqmAvyIEfCCsY5rHNVbNw" name="type" type="_86Y6YPyGEfCCsY5rHNVbNw"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_kfqmA_yIEfCCsY5rHNVbNw" name="amount">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_qv_7oPyIEfCCsY5rHNVbNw" name="receiveResource" concurrency="concurrent">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_qv_7ofyIEfCCsY5rHNVbNw" name="Parameter1" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_qv_7ovyIEfCCsY5rHNVbNw" name="type" type="_86Y6YPyGEfCCsY5rHNVbNw"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_qv_7o_yIEfCCsY5rHNVbNw" name="amount">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_t6NlQPYvEfCRM-_Cjx4kQw"/>
+    <packagedElement xmi:type="uml:Enumeration" xmi:id="_86Y6YPyGEfCCsY5rHNVbNw" name="ResourceType">
+      <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_-2CuwPyGEfCCsY5rHNVbNw" name="GRAIN"/>
+      <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_AsaagPyHEfCCsY5rHNVbNw" name="BRICK"/>
+      <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_C0xOIPyHEfCCsY5rHNVbNw" name="ORE"/>
+      <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_FrducPyHEfCCsY5rHNVbNw" name="LUMBER"/>
+      <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_IBPTAPyHEfCCsY5rHNVbNw" name="WOOL"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_OVQOwPyHEfCCsY5rHNVbNw" client="_SrWSIPYtEfCRM-_Cjx4kQw" supplier="_86Y6YPyGEfCCsY5rHNVbNw"/>
+    <packagedElement xmi:type="uml:Activity" xmi:id="_UsNM8PyLEfC_sP5KOw9pNA" name="Activity9"/>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_kAjqcPYtEfCRM-_Cjx4kQw">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_kAqYIPYtEfCRM-_Cjx4kQw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://PAPYRUS_ACTIONLANGUAGE_PROFILE/ActionLanguage-Profile.profile.uml#_Kv8EIKFXEeS_KNX0nfvIVQ"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://PAPYRUS_ACTIONLANGUAGE_PROFILE/ActionLanguage-Profile.profile.uml#ActionLanguage"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_lEly8PYwEfCRM-_Cjx4kQw">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_lEnBEPYwEfCRM-_Cjx4kQw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/Codegen/1#/"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://Codegen_PROFILES/Codegen.profile.uml#_fPDsIBa-EearhdjjJ6cVzQ"/>
+    </profileApplication>
+  </uml:Model>
+  <Codegen:GeneratorHint xmi:id="_lFB30PYwEfCRM-_Cjx4kQw" base_Element="_9w1R8PYqEfCRM-_Cjx4kQw" generatorID="Standard Java">
+    <language xmi:type="Codegen:Language" href="pathmap://Codegen_PROFILES/languages.uml#_2Zt6YCjREeayco6FJ_OtTQ"/>
+  </Codegen:GeneratorHint>
+</xmi:XMI>

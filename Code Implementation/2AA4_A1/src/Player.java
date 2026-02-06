@@ -23,4 +23,16 @@ public class Player {
 	}
 	public void build() {
 	}
+
+	public void addResource(ResourceType type, int amount) { //ADDED
+        hand.merge(type, amount, Integer::sum);
+    }
+
+    public int getTotalResources() { //ADDED
+        int total = 0;
+        for (int count : hand.values()) {
+            total += count;
+        }
+        return total;
+    }
 }

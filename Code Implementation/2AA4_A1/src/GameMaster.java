@@ -70,6 +70,17 @@ public class GameMaster {
 	 * @param roll 
 	 */
 	public void distributeResources(int roll) {
+		for (HexTile tile : map.getTiles()) {
+            if (tile.getTokenNumber() != roll) continue;
+
+            ResourceType resource = tile.getResource();
+
+            for (Node node : tile.getNodes()) {
+                if (node.isOccupied() && bank.giveResource(resource, 1)) {
+                    node.getOwner().addResource(resource, 1);
+                }
+            }
+        }
 	}
 	/**
 	 * 
@@ -107,4 +118,12 @@ public class GameMaster {
 	 */
 	public boolean isGameOver() {
 	}
+
+	public void handlePlayersWithMoreThanSevenCards() {
+    	for (Player player : players) {
+            if (player.getTotalResources() > 7) {
+                player.build();
+            }
+        }
+    }
 }

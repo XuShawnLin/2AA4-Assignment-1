@@ -6,14 +6,13 @@ package 2AA4_A1;
 
 public class Player {
 	private int victoryPoint;
-	private undef piecesOwned;
-	private undef resourceOwned;
+	private Board<PieceType, Integer> piecesOwned;
+	private Board<ResourceType, Integer> resourceOwned;
 	private String name;
 	
 	public void Player(String name) {
 		this.name = name;
 		victoryPoint = 2;
-		
 	}
 	
 	public void getCurrentResources() {

@@ -1,0 +1,1 @@
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=XuShawnLin_2AA4-Assignment-1&metric=alert_status&token=66d4b928d4a012981f7f0d4958dd24e95142f09b)](https://sonarcloud.io/summary/new_code?id=XuShawnLin_2AA4-Assignment-1)

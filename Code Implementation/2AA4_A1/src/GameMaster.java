@@ -39,31 +39,55 @@ public class GameMaster {
 				 * 
 				 */
 				public Bank bank;
+				/**
+				 * 
+				 */
+				public Board board;
 	/**
 	 * 
 	 */
-	public void GameMaster() {
+	public GameMaster() {
+		currentPlayerIndex = 0;
+		gameOver = false;
+		winningVP = 10;
+		dice1 = 0;
+		dice2 = 0;
 	}
 	/**
 	 * 
 	 */
 	public void startGame() {
+		bank = new Bank();
+		board = new Board();
+		currentPlayerIndex = 0;
+		gameOver = false;
 	}
 	/**
 	 * 
 	 */
 	public void nextTurn() {
+		if (player != null && player.length > 0) {
+			currentPlayerIndex = (currentPlayerIndex + 1) % player.length;
+		}
 	}
 	/**
 	 * 
+	 * @return 
 	 */
-	public void getCurrentPlayer() {
+	public Player getCurrentPlayer() {
+		if (player != null && currentPlayerIndex >= 0 && currentPlayerIndex < player.length) {
+			return player[currentPlayerIndex];
+		}
+		return null;
 	}
 	/**
 	 * 
 	 * @return 
 	 */
 	public int rollDice() {
+		dice1 = (int)(Math.random() * 6) + 1;
+		dice2 = (int)(Math.random() * 6) + 1;
+		return dice1 + dice2;
 	}
 	/**
 	 * 

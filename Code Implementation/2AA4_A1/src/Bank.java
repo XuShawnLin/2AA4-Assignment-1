@@ -1,34 +1,48 @@
-
 package 2AA4_A1;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Bank {
-	private Map<ResourceType, Integer> resourceList = null;
 
-	public void Bank () {
-		resourceList = new EnumMap<>(ResourceType.class);
+	private Map<ResourceType, Integer> resourceList; //create original resource list for bank
 
-        for (ResourceType type : ResourceType.values()) {
-            resourceList.put(type, 19);
-        }
+	/**
+	 * Constructor for Bank
+	 */
+	public Bank() {
+		resourceList = new HashMap<>();
+		for (ResourceType type : ResourceType.values()) { //add 19 resources per type to map (LUMBER:19, etc)
+			resourceList.put(type, 19);
+		}
 	}
 
+
+	/**
+	 * Checks if bank has needed number of resources
+	 */
 	public boolean hasResource(ResourceType type, int amount) {
-		return resourceList.containsKey(type) && resourceList.get(type) >= amount;
+		return resourceList.getOrDefault(type, 0) >= amount;
 	}
 
+
+	/**
+	 * Gives needed amound of resources to player
+	 */
 	public boolean giveResource(ResourceType type, int amount) {
 		if (!hasResource(type, amount)) {
-            return false;
-        }
-        resourceList.put(type, resourceList.get(type) - amount);
-        return true;
+			return false; //if there are enough resources
+		}
+
+		resourceList.put(type, resourceList.get(type) - amount); //take away from bank
+		return true;
 	}
 
+	/**
+	 * Gets resources player builds
+	 */
 	public boolean receiveResource(ResourceType type, int amount) {
-		resourceList.put(type, resourceList.get(type) + amount);
+		resourceList.put(type, resourceList.getOrDefault(type, 0) + amount); //adds back resources to corresponding type
+		return true;
 	}
-
-	public int getAmount(ResourceType type) {
-        return resourceList.get(type);
-    }
 }

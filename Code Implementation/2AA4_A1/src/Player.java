@@ -10,18 +10,35 @@ public class Player {
 	private Board<ResourceType, Integer> resourceOwned;
 	private String name;
 	
-	public void Player(String name) {
+	public Player() {					//constructor to initialize variables
+		this.victoryPoint = 2;
+		this.piecesOwned = new ArrayList<>();
+		this.resourcedOwned = new HashMap<>();
+		for (ResourceType type : ResourceType.values()) {
+			resourcedOwned.put(type, 0);
+		}
+		this.name = "Unknown";
+	}
+
+	public Player(String name) {
+		this();
 		this.name = name;
-		victoryPoint = 2;
 	}
-	
-	public void getCurrentResources() {
-		return resourceOwned;
+
+	public String getName() {
+		return name;
 	}
+
+	public Map<ResourceType, Integer> getCurrentResources() {
+		return resourcedOwned;
+	}
+
 	public int getVictoryPoints() {
 		return victoryPoint;
 	}
-	public void build() {
+
+	public void addVictoryPoints(int points) {
+		this.victoryPoint += points;
 	}
 
 	public void addResource(ResourceType type, int amount) { //ADDED

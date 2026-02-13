@@ -116,31 +116,32 @@ public class GameMaster {
 	 * 
 	 * @return 
 	 */
-	public boolean buildRoad() {
+
+	public boolean buildRoad(Edge edge) {
+		BuildStructure bs = new BuildStructure(getCurrentPlayer(), bank);
+		return bs.buildRoad(edge);
 	}
-	/**
-	 * 
-	 * @return 
-	 */
-	public boolean buildSettlement() {
+
+	public boolean buildSettlement(Node node) {
+		BuildStructure bs = new BuildStructure(getCurrentPlayer(), bank);
+		return bs.buildSettlement(node);
 	}
-	/**
-	 * 
-	 * @return 
-	 */
-	public boolean buildCity() {
+	
+	public boolean buildCity(Node node) {
+		BuildStructure bs = new BuildStructure(getCurrentPlayer(), bank);
+		return bs.buildCity(node);
 	}
-	/**
-	 * 
-	 * @return 
-	 */
+	
 	public boolean checkWin() {
+		if (getCurrentPlayer().getVictoryPoints() >= winningVP) {
+			gameOver = true;
+			return true;
+		}
+		return false;
 	}
-	/**
-	 * 
-	 * @return 
-	 */
+	
 	public boolean isGameOver() {
+		return gameOver;
 	}
 
 	public void handlePlayersWithMoreThanSevenCards() {

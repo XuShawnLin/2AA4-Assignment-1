@@ -14,28 +14,75 @@ public class BuildStructure extends Player
 	 * @param p The player performing the build action.
 	 */
 	public void BuildStructure(Player p) {
+		this.player = p;
+		this.bank = b;
 	}
 	/**
 	 * Attempts to build a settlement.
 	 * @return True if settlement is successfully built, false otherwise.
 	 */
 	public boolean buildSettlement() {
+		if (player.removeResource(ResourceType.BRICK, 1) &&
+			player.removeResource(ResourceType.LUMBER, 1) &&
+			player.removeResource(ResourceType.WOOL, 1) &&
+			player.removeResource(ResourceType.GRAIN, 1)) {
+			
+			node.owner = player;
+			node.building = BuildingType.SETTLEMENT;
+			player.addVictoryPoints(1);
+			
+			bank.receiveResource(ResourceType.BRICK, 1);
+			bank.receiveResource(ResourceType.LUMBER, 1);
+			bank.receiveResource(ResourceType.WOOL, 1);
+			bank.receiveResource(ResourceType.GRAIN, 1);
+			return true;
+		}
+		return false;
 	}
 	/**
 	 * Attempts to build a city.
 	 * @return True if city is successfully built, false otherwise.
 	 */
 	public boolean buildCity() {
+		if (node.building == BuildingType.SETTLEMENT && node.owner == player) {
+			if (player.removeResource(ResourceType.ORE, 3) &&
+				player.removeResource(ResourceType.GRAIN, 2)) {
+				
+				node.building = BuildingType.CITY;
+				player.addVictoryPoints(1); // Settlement (1) becomes City (2)
+				
+				bank.receiveResource(ResourceType.ORE, 3);
+				bank.receiveResource(ResourceType.GRAIN, 2);
+				return true;
+			}
+		}
+		return false;
 	}
 	/**
 	 * Attempts to build a road.
 	 * @return True if road is successfully built, false otherwise.
 	 */
 	public boolean buildRoad() {
+		if (player.removeResource(ResourceType.BRICK, 1) &&
+			player.removeResource(ResourceType.LUMBER, 1)) {
+			
+			edge.owner = player;
+			edge.building = BuildingType.ROAD;
+			
+			bank.receiveResource(ResourceType.BRICK, 1);
+			bank.receiveResource(ResourceType.LUMBER, 1);
+			return true;
+		}
+		return false;
 	}
 	/**
 	 * Awards victory points to the player based on built structures.
 	 */
 	public void giveVPs() {
+		if(type == BuildingType.SETTLEMENT)
+            player.addVictoryPoints(1);
+
+        if(type == BuildingType.CITY)
+            player.addVictoryPoints(1);
 	}
 }

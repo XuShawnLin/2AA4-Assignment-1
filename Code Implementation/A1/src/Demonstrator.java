@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Demonstrator class for the Catan game implementation.
+ */
 public class Main {
     public static void main(String[] args) {
         // 1. Setup Bank

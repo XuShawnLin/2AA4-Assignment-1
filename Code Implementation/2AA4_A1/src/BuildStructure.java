@@ -4,41 +4,62 @@
 
 package 2AA4_A1;
 
+public class BuildStructure {
+	
+	private Player player;
+	private Bank bank;
 
+	public BuildStructure(Player p, Bank b) {				//consturctor to initialize variables
+		this.player = p;
+		this.bank = b;
+	}
 
-/************************************************************/
-/**
- * 
- */
-public class BuildStructure extends Player
- {
-	/**
-	 * 
-	 * @param p 
-	 */
-	public void BuildStructure(Player p) {
+	public boolean buildSettlement(Node node) {				//method to build a settlement, checks if has the resourses and whether it the node is available
+		if (player.removeResource(ResourceType.BRICK, 1) &&
+			player.removeResource(ResourceType.LUMBER, 1) &&
+			player.removeResource(ResourceType.WOOL, 1) &&
+			player.removeResource(ResourceType.GRAIN, 1)) {
+			
+			node.owner = player;
+			node.building = BuildingType.SETTLEMENT;
+			player.addVictoryPoints(1);
+			
+			bank.receiveResource(ResourceType.BRICK, 1);
+			bank.receiveResource(ResourceType.LUMBER, 1);
+			bank.receiveResource(ResourceType.WOOL, 1);
+			bank.receiveResource(ResourceType.GRAIN, 1);
+			return true;
+		}
+		return false;
 	}
-	/**
-	 * 
-	 * @return 
-	 */
-	public boolean buildSettlement() {
+
+	public boolean buildCity(Node node) {					//method to build a city, checks if has the resourses and whether it the node is available
+		if (node.building == BuildingType.SETTLEMENT && node.owner == player) {
+			if (player.removeResource(ResourceType.ORE, 3) &&
+				player.removeResource(ResourceType.GRAIN, 2)) {
+				
+				node.building = BuildingType.CITY;
+				player.addVictoryPoints(1); // Settlement (1) becomes City (2)
+				
+				bank.receiveResource(ResourceType.ORE, 3);
+				bank.receiveResource(ResourceType.GRAIN, 2);
+				return true;
+			}
+		}
+		return false;
 	}
-	/**
-	 * 
-	 * @return 
-	 */
-	public boolean buildCity() {
-	}
-	/**
-	 * 
-	 * @return 
-	 */
-	public boolean buildRoad() {
-	}
-	/**
-	 * 
-	 */
-	public void giveVPs() {
+
+	public boolean buildRoad(Edge edge) {					//method to build a road, checks if has the resourses and whether it the edge is available
+		if (player.removeResource(ResourceType.BRICK, 1) &&
+			player.removeResource(ResourceType.LUMBER, 1)) {
+			
+			edge.owner = player;
+			edge.building = BuildingType.ROAD;
+			
+			bank.receiveResource(ResourceType.BRICK, 1);
+			bank.receiveResource(ResourceType.LUMBER, 1);
+			return true;
+		}
+		return false;
 	}
 }

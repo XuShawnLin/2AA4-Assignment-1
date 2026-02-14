@@ -11,7 +11,7 @@ import java.util.Map;
 public class Player {
 	private int victoryPoint;
 	private List<BuildingType> piecesOwned;
-	private Map<ResourceType, Integer> resourcesOwned;
+	private Map<ResourceType, Integer> resourcedOwned;
 	private String name;
 
 	/**
@@ -20,9 +20,9 @@ public class Player {
 	public Player() {
 		this.victoryPoint = 2;
 		this.piecesOwned = new ArrayList<>();
-		this.resourcesOwned = new HashMap<>();
+		this.resourcedOwned = new HashMap<>();
 		for (ResourceType type : ResourceType.values()) {
-			resourcesOwned.put(type, 0);
+			resourcedOwned.put(type, 0);
 		}
 		this.name = "Unknown";
 	}
@@ -45,7 +45,7 @@ public class Player {
 	 * Retrieves the current resources owned by the player.
 	 */
 	public Map<ResourceType, Integer> getCurrentResources() {
-		return resourcesOwned;
+		return resourcedOwned;
 	}
 
 	/**
@@ -66,16 +66,16 @@ public class Player {
 	 * Add resources to player
 	 */
 	public void addResource(ResourceType type, int amount) {
-		resourcesOwned.put(type, resourcesOwned.get(type) + amount);
+		resourcedOwned.put(type, resourcedOwned.get(type) + amount);
 	}
 
 	/**
 	 * Removes resources when exchanging for VP or building
 	 */
 	public boolean removeResource(ResourceType type, int amount) {
-		int current = resourcesOwned.get(type);
+		int current = resourcedOwned.get(type);
 		if (current >= amount) {
-			resourcesOwned.put(type, current - amount);
+			resourcedOwned.put(type, current - amount);
 			return true;
 		}
 		return false;
@@ -83,9 +83,13 @@ public class Player {
 
 	public int getTotalResources() {
 		int total = 0;
-		for (int count : resourcesOwned.values()) {
+		for (int count : resourcedOwned.values()) {
 			total += count;
 		}
 		return total;
+	}
+
+	public void build() {
+		// Implementation for building
 	}
 }

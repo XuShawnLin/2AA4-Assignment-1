@@ -55,4 +55,41 @@ public class HexTile {
 			this.tokenNumber = TokenNumber.valueOf("T" + token);
 		}
 	}
+
+	public TokenNumber getTokenNumberEnum() {
+		return tokenNumber;
+	}
+
+	public int getTokenNumber() {
+		return tokenNumber == null ? 0 : tokenNumber.getValue();
+	}
+
+	public ResourceType getResource() {
+		return resource;
+	}
+
+	public List<Node> getNodes() {
+		return nodes;
+	}
+
+	/**
+	 * Adds a node to this tile.
+	 * @param node The node to add.
+	 */
+	public void addNode(Node node) {
+		this.nodes.add(node);
+	}
+
+	/**
+	 * Distributes resources to players with buildings on this tile's nodes.
+	 */
+	public void resourceProduction() {
+		if (resource == null) return; // Desert or no resource
+		for (Node node : nodes) {
+			if (node.isOccupied()) {
+				int amount = (node.building == BuildingType.CITY) ? 2 : 1;
+				node.owner.addResource(resource, amount);
+			}
+		}
+	}
 }

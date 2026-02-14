@@ -161,4 +161,11 @@ public class Board {
 		}
 		return adjacent;
 	}
+
+	/**
+	 * Updates board state.
+	 */
+	public void updateBoard() {
+		// General update logic
+	}
 }

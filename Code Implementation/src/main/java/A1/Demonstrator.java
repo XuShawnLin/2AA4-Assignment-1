@@ -5,76 +5,141 @@ import java.util.List;
 
 /**
  * Demonstrator class for the Catan game implementation.
+ * This class simulates a game of Catan, handling setup, turn-based actions,
+ * and game termination conditions.
  */
 public class Demonstrator {
+    /**
+     * Main method to run the Catan game simulation.
+     * 
+     * @param args Command line arguments. The first argument can be used to set the maximum number of turns (1-8192).
+     */
     public static void main(String[] args) {
-        // 1. Setup Bank
-        Bank bank = new Bank();
+        int turns = 8192; // Max number of turns
+        
+        // Parse the number of turns from command line arguments if provided
+        if (args.length > 0) {
+            try {
+                int inputTurns = Integer.parseInt(args[0]);
+                if (inputTurns > 0 && inputTurns <= 8192) {
+                    turns = inputTurns;
+                }
+            } catch (NumberFormatException e) {
+                // Keep default value if parsing fails
+            }
+        }
+        
+        System.out.println("turns: " + turns);
 
-        // 2. Setup 4 Players
-        Player p1 = new Player("Shawn");
-        Player p2 = new Player("Sabrina");
-        Player p3 = new Player("Subha");
-        Player p4 = new Player("Ahmed");
-        Player[] players = {p1, p2, p3, p4};
+        // Initialize the GameMaster and start the game
+        GameMaster gm = new GameMaster();
+        gm.startGame();
 
-        // 3. Setup Board
-        Board board = new Board();
-
-        // 4. Create 19 HexTiles (18 resource tiles + 1 desert for Robber)
-        // Standard Catan distribution: 4 Lumber, 4 Grain, 4 Wool, 3 Brick, 3 Ore, 1 Desert
-        HexTile[] tiles = {
-                new HexTile(0, ResourceType.LUMBER, 11),
-                new HexTile(1, ResourceType.LUMBER, 3),
-                new HexTile(2, ResourceType.LUMBER, 6),
-                new HexTile(3, ResourceType.LUMBER, 4),
-                new HexTile(4, ResourceType.GRAIN, 5),
-                new HexTile(5, ResourceType.GRAIN, 9),
-                new HexTile(6, ResourceType.GRAIN, 10),
-                new HexTile(7, ResourceType.GRAIN, 8),
-                new HexTile(8, ResourceType.WOOL, 2),
-                new HexTile(9, ResourceType.WOOL, 12),
-                new HexTile(10, ResourceType.WOOL, 9),
-                new HexTile(11, ResourceType.WOOL, 10),
-                new HexTile(12, ResourceType.BRICK, 4),
-                new HexTile(13, ResourceType.BRICK, 5),
-                new HexTile(14, ResourceType.BRICK, 6),
-                new HexTile(15, ResourceType.ORE, 3),
-                new HexTile(16, ResourceType.ORE, 8),
-                new HexTile(17, ResourceType.ORE, 11),
-                new HexTile(18, null, 0)  // Desert tile for Robber (no resource, no token)
+        // Define and setup 4 players for the simulation
+        Player[] players = {
+                new Player("Shawn"),
+                new Player("Sabrina"),
+                new Player("Subha"),
+                new Player("Ahmed")
         };
+        gm.players = players;
+        
+        // Note: For simulation purposes, we use the default winning condition from GameMaster.
 
-        // Add all tiles to the board
-        for (HexTile tile : tiles) {
-            board.addTile(tile);
+        // Setup the game board using spiral identification
+        Board board = gm.board;
+        // Identification logic: 0 is center, 1-6 are the inner ring, 7-18 are the outer ring.
+        
+        // Assign resources and number tokens to tiles based on the spiral layout
+        ResourceType[] resOrder = {
+                ResourceType.LUMBER, // 0 (Center)
+                ResourceType.LUMBER, ResourceType.LUMBER, ResourceType.LUMBER, // 1-3 (Inner)
+                ResourceType.GRAIN, ResourceType.GRAIN, ResourceType.GRAIN, // 4-6 (Inner)
+                ResourceType.GRAIN, ResourceType.WOOL, ResourceType.WOOL, ResourceType.WOOL, // 7-10 (Outer)
+                ResourceType.WOOL, ResourceType.BRICK, ResourceType.BRICK, ResourceType.BRICK, // 11-14 (Outer)
+                ResourceType.ORE, ResourceType.ORE, ResourceType.ORE, // 15-17 (Outer)
+                null // 18 (Desert)
+        };
+        int[] tokenOrder = {11, 3, 6, 4, 5, 9, 10, 8, 2, 12, 9, 10, 4, 5, 6, 3, 8, 11, 0};
+
+        List<HexTile> tiles = board.getTiles();
+        for (int i = 0; i < tiles.size() && i < 19; i++) {
+            HexTile tile = tiles.get(i);
+            tile.resource = resOrder[i];
+            if (tokenOrder[i] != 0) {
+                tile.tokenNumber = TokenNumber.valueOf("T" + tokenOrder[i]);
+            }
+            
+            // Link nodes to tiles to enable resource production simulation.
+            // In this simplified simulation, we associate 3 nodes with each tile.
+            for (int j = 0; j < 3; j++) {
+                int nodeId = (i * 2 + j) % board.getNodes().size();
+                tile.addNode(board.getNodes().get(nodeId));
+            }
         }
 
-        // 5. Create 18 Nodes (simplified board without harbours)
-        List<Node> allNodes = new ArrayList<>();
-        for (int i = 0; i < 18; i++) {
-            Node node = new Node(i);
-            allNodes.add(node);
-            board.addNode(node);
+        // Perform initial placement of settlements for all players
+        for (int i = 0; i < players.length; i++) {
+            Player p = players[i];
+            Node n = board.getNodes().get(i * 2);
+            // Build the initial settlement for each player during setup phase
+            BuildStructure bs = new BuildStructure(p, gm.bank);
+            bs.buildSettlement(n);
+            System.out.println("0 / " + p.getName() + ": placed a settlement on node " + n.id);
         }
 
-        // 6. Create 27 Edges (simplified board without harbours)
-        List<Edge> allEdges = new ArrayList<>();
-        for (int i = 0; i < 27; i++) {
-            Edge edge = new Edge(i);
-            allEdges.add(edge);
-            board.addEdge(edge);
-        }
+        // Execute the main simulation loop
+        for (int round = 1; round <= turns; round++) {
+            for (int i = 0; i < players.length; i++) {
+                Player p = gm.getCurrentPlayer();
+                
+                // Turn Action: Roll the dice and distribute resources accordingly
+                int roll = gm.rollDice();
+                gm.distributeResources(roll);
+                System.out.println(round + " / " + p.getName() + ": rolled a " + roll);
 
-        // 7. Associate nodes with tiles (simplified mapping for 18 nodes)
-        // Each tile gets one node associated with it
-        for (int t = 0; t < tiles.length && t < allNodes.size(); t++) {
-            tiles[t].addNode(allNodes.get(t));
-        }
+                // Simulation Logic: Periodically grant additional resources to accelerate game progress
+                if (Math.random() > 0.3) {
+                    p.addResource(ResourceType.LUMBER, 2);
+                    p.addResource(ResourceType.BRICK, 2);
+                    p.addResource(ResourceType.GRAIN, 1);
+                    p.addResource(ResourceType.WOOL, 1);
+                }
 
-        System.out.println("Board setup complete!");
-        System.out.println("Tiles: " + board.getTiles().size());
-        System.out.println("Nodes: " + board.getNodes().size());
-        System.out.println("Edges: " + board.getEdges().size());
+                // Decision Logic: Attempt to build a settlement or a road if resources permit
+                if (p.getCurrentResources().get(ResourceType.LUMBER) > 0 && p.getCurrentResources().get(ResourceType.BRICK) > 0) {
+                    boolean built = false;
+                    // Try to find a valid location for a new settlement
+                    for (Node node : board.getNodes()) {
+                        if (board.isValidSettlement(node, p)) {
+                            if (gm.buildSettlement(node)) {
+                                System.out.println(round + " / " + p.getName() + ": built a settlement on node " + node.id);
+                                built = true;
+                                break;
+                            }
+                        }
+                    }
+                    
+                    // If no settlement could be built, attempt to build a road instead
+                    if (!built) {
+                        p.removeResource(ResourceType.LUMBER, 1);
+                        p.removeResource(ResourceType.BRICK, 1);
+                        System.out.println(round + " / " + p.getName() + ": built a road");
+                    }
+                } else {
+                    // End turn if no building actions are possible
+                    System.out.println(round + " / " + p.getName() + ": ended turn");
+                }
+
+                // Check if the current player has reached the victory point threshold
+                if (gm.checkWin()) {
+                    System.out.println(round + " / " + p.getName() + ": WON THE GAME!");
+                    return;
+                }
+                
+                // Pass the turn to the next player
+                gm.nextTurn();
+            }
+        }
     }
 }

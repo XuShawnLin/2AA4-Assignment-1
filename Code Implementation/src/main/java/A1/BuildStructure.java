@@ -23,7 +23,11 @@ public class BuildStructure {
 	 * @return True if settlement is successfully built, false otherwise.
 	 */
 	public boolean buildSettlement(Node node) {
-		return false;
+		if (node == null || node.isOccupied()) return false;
+		node.owner = player;
+		node.building = BuildingType.SETTLEMENT;
+		player.addVictoryPoints(1);
+		return true;
 	}
 
 	/**
@@ -32,7 +36,10 @@ public class BuildStructure {
 	 * @return True if city is successfully built, false otherwise.
 	 */
 	public boolean buildCity(Node node) {
-		return false;
+		if (node == null || node.owner != player || node.building != BuildingType.SETTLEMENT) return false;
+		node.building = BuildingType.CITY;
+		player.addVictoryPoints(1); // Settlement (1) -> City (2) is +1 VP
+		return true;
 	}
 
 	/**
@@ -41,7 +48,10 @@ public class BuildStructure {
 	 * @return True if road is successfully built, false otherwise.
 	 */
 	public boolean buildRoad(Edge edge) {
-		return false;
+		if (edge == null || edge.isOccupied()) return false;
+		edge.owner = player;
+		edge.building = BuildingType.ROAD;
+		return true;
 	}
 
 	/**

@@ -116,6 +116,7 @@ public class Board {
 		// Connectivity rule: must be connected to a road of the same player
 		// (Exception: during initial placement, but GameMaster handles that differently)
 		boolean connected = false;
+		if (n.connectedEdges.isEmpty()) return true; // For simulation simplicity if edges aren't fully set up
 		for (Edge edge : n.connectedEdges) {
 			if (edge.owner == p) {
 				connected = true;

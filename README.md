@@ -9,6 +9,6 @@
 **Date:** February 13, 2026
 **Course:** SFWRENG 2AA4
 
-This repository contains the Eclipse files used for to design the Catan, generative AI code, and our own code implementation of Catan. 
+This repository contains the related files for Assignment 1 for simulating the game Catan.
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=XuShawnLin_2AA4-Assignment-1&metric=alert_status&token=66d4b928d4a012981f7f0d4958dd24e95142f09b)](https://sonarcloud.io/summary/new_code?id=XuShawnLin_2AA4-Assignment-1)

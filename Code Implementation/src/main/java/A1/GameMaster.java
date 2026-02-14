@@ -27,7 +27,7 @@ public class GameMaster {
 	/**
 	 * Array of players in the game.
 	 */
-	public Player[] player;
+	public Player[] players;
 	/**
 	 * Bank instance for resource management.
 	 */
@@ -39,7 +39,7 @@ public class GameMaster {
 	/**
 	 * Constructor for GameMaster class.
 	 */
-	public void GameMaster() {
+	public GameMaster() {
 		currentPlayerIndex = 0;
 		gameOver = false;
 		winningVP = 10;
@@ -59,8 +59,8 @@ public class GameMaster {
 	 * Advances the game to the next player's turn.
 	 */
 	public void nextTurn() {
-		if (player != null && player.length > 0) {
-			currentPlayerIndex = (currentPlayerIndex + 1) % player.length;
+		if (players != null && players.length > 0) {
+			currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
 		}
 	}
 	/**
@@ -68,8 +68,8 @@ public class GameMaster {
 	 * @return The current player, or null if no players are present.
 	 */
 	public Player getCurrentPlayer() {
-		if (player != null && currentPlayerIndex >= 0 && currentPlayerIndex < player.length) {
-			return player[currentPlayerIndex];
+		if (players != null && currentPlayerIndex >= 0 && currentPlayerIndex < players.length) {
+			return players[currentPlayerIndex];
 		}
 		return null;
 	}

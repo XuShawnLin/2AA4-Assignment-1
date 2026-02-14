@@ -10,14 +10,14 @@ import java.util.Map;
  */
 public class Player {
 	private int victoryPoint;
-	private List<PieceType> piecesOwned;
+	private List<BuildingType> piecesOwned;
 	private Map<ResourceType, Integer> resourcedOwned;
 	private String name;
 
 	/**
 	 * Constructor for Player class if no name.
 	 */
-	public void Player() {
+	public Player() {
 		this.victoryPoint = 2;
 		this.piecesOwned = new ArrayList<>();
 		this.resourcedOwned = new HashMap<>();
@@ -70,7 +70,7 @@ public class Player {
 	}
 
 	/**
-	 * Removes resourses when exchanging for VP or building
+	 * Removes resources when exchanging for VP or building
 	 */
 	public boolean removeResource(ResourceType type, int amount) {
 		int current = resourcedOwned.get(type);
@@ -79,5 +79,17 @@ public class Player {
 			return true;
 		}
 		return false;
+	}
+
+	public int getTotalResources() {
+		int total = 0;
+		for (int count : resourcedOwned.values()) {
+			total += count;
+		}
+		return total;
+	}
+
+	public void build() {
+		// Implementation for building
 	}
 }

@@ -99,16 +99,6 @@ public class GameMaster {
 			}
 		}
 	}
-	/**
-	 *
-	 * @return
-	 */
-	public boolean tradeWithBank() {
-	}
-	/**
-	 *
-	 * @return
-	 */
 
 	public boolean buildRoad(Edge edge) {
 		BuildStructure bs = new BuildStructure(getCurrentPlayer(), bank);

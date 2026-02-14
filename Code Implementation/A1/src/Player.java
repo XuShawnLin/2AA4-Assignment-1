@@ -1,5 +1,9 @@
 package A1;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 /**
  * Class representing a player in the game.
  */
